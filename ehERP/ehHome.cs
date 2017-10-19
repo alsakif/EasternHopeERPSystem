@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ehERP
 {
-    public partial class Form1 : Form
+    public partial class ehHome : Form
     {
-        public Form1()
+        public ehHome()
         {
             InitializeComponent();
         }
