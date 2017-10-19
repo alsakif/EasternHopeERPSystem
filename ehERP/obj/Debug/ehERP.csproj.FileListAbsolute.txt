@@ -1,0 +1,9 @@
+F:\Project\ehERP\ehERP\bin\Debug\ehERP.exe.config
+F:\Project\ehERP\ehERP\bin\Debug\ehERP.exe
+F:\Project\ehERP\ehERP\bin\Debug\ehERP.pdb
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.csprojResolveAssemblyReference.cache
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.ehHome.resources
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.Properties.Resources.resources
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.GenerateResource.Cache
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.exe
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
