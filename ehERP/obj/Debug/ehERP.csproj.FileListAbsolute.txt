@@ -7,3 +7,6 @@ F:\Project\ehERP\ehERP\obj\Debug\ehERP.Properties.Resources.resources
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.GenerateResource.Cache
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.exe
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
+F:\Project\ehERP\ehERP\bin\Debug\MaterialSkin.dll
+F:\Project\ehERP\ehERP\bin\Debug\MySql.Data.DLL
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.acRec.resources
