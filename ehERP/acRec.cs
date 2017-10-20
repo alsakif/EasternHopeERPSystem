@@ -16,5 +16,10 @@ namespace ehERP
         {
             InitializeComponent();
         }
+
+        private void materialLabel15_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
