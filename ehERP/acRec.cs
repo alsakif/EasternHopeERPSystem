@@ -16,8 +16,10 @@ namespace ehERP
         public acRec()
         {
             InitializeComponent();
-            addItemBtn.Enabled = false;// disable add button initially.
+            add.Enabled = false;// disable add button initially.
+            addItemBtn.Enabled = false;
             hidePnl.BringToFront();
+            hidePnl01.BringToFront();
         }
 
         private void qty_TextChanged(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace ehERP
         {
             try
             {
-                con.Open();
+                /*con.Open();
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into new_record(ItemType, PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
@@ -53,11 +55,12 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-                con.Close();
+                con.Close(); */
 
                 // Enable add item button
+                add.Enabled = true;
                 addItemBtn.Enabled = true;
-                hidePnl.SendToBack();
+               
 
             }
             catch (Exception ex)
@@ -66,9 +69,53 @@ namespace ehERP
             }
         }
 
+
+        private void refreahBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                c1.Text = "";
+                pName.Text = "";
+                oNo.Text = "";
+                iNo.Text = "";
+                prName.Text = "";
+                uPrice.Text = "";
+                qty.Text = "";
+                unit.Text = "";
+                total.Text = "";
+                advanced.Text = "";
+                remark.Text = "";
+
+                add.Enabled = false;// disable add button
+                addItemBtn.Enabled = false;
+                hidePnl.BringToFront(); //checkbox will be hidden
+                hidePnl01.BringToFront(); //total will be hidden
+                checkBox1.Checked = false;
+            }
+            catch (Exception x)
+            {
+                // MessageBox.Show("Errors: " + x);
+            }
+            
+        }
+
         private void addItemBtn_Click(object sender, EventArgs e)
         {
+            /*Retrive previous items data from db and'd show upto invoice number. total will be shown on 
+             the total RHS label*/
+            hidePnl.SendToBack();
+            checkBox1.Checked = false;
+            hidePnl01.SendToBack();
+        }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            // upon checked changed textbox total will be added with label total. And the label total will show the sum ip of the it.
+        }
+
+        private void add_Click(object sender, EventArgs e)
+        {
+            //update the total from the total label to datbase total on same order and invoice number 
         }
     }
 }
