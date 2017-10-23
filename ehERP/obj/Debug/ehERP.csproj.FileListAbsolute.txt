@@ -11,3 +11,14 @@ F:\Project\ehERP\ehERP\bin\Debug\MaterialSkin.dll
 F:\Project\ehERP\ehERP\bin\Debug\MySql.Data.DLL
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.acRec.resources
 F:\Project\ehERP\ehERP\bin\Debug\MetroFramework.dll
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\bin\Debug\ehERP.exe.config
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\bin\Debug\ehERP.exe
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\bin\Debug\ehERP.pdb
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.csprojResolveAssemblyReference.cache
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.acRec.resources
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.ehHome.resources
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.Properties.Resources.resources
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.GenerateResource.Cache
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.CoreCompileInputs.cache
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.exe
+C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
