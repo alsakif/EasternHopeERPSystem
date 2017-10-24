@@ -16,12 +16,13 @@ namespace ehERP
         public acRec()
         {
             InitializeComponent();
-            add.Enabled = false;// disable add button initially.
-            addItemBtn.Enabled = false;
-            hidePnl.BringToFront();
-            hidePnl01.BringToFront();
+            add.Enabled = false;// page1: entry--disable add button initially.
+            addItemBtn.Enabled = false;//page1: entry
+            hidePnl.BringToFront();//page1: entry
+            hidePnl01.BringToFront();// page1: entry
         }
 
+        /* ************************************************** page 1 : entry starts************************************************************************* */
         private void qty_TextChanged(object sender, EventArgs e)
         {
             try
@@ -117,5 +118,7 @@ namespace ehERP
         {
             //update the total from the total label to datbase total on same order and invoice number 
         }
+
+        /* *********************************************************Page: 1-- Entry Ends***************************************************************** */
     }
 }
