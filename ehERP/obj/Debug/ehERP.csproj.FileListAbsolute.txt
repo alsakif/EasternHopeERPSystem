@@ -22,3 +22,14 @@ C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.GenerateResour
 C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.CoreCompileInputs.cache
 C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.exe
 C:\Users\alsak\Desktop\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
+D:\Project\ehERP\ehERP\bin\Debug\ehERP.exe.config
+D:\Project\ehERP\ehERP\bin\Debug\ehERP.exe
+D:\Project\ehERP\ehERP\bin\Debug\ehERP.pdb
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.csprojResolveAssemblyReference.cache
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.acRec.resources
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.ehHome.resources
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.Properties.Resources.resources
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.GenerateResource.Cache
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.CoreCompileInputs.cache
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.exe
+D:\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
