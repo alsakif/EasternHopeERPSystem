@@ -119,6 +119,14 @@ namespace ehERP
             //update the total from the total label to datbase total on same order and invoice number 
         }
 
+        private void eEditBtn_Click(object sender, EventArgs e)
+        {
+            acRecEntryEdit obj = new acRecEntryEdit();
+            obj.Show();
+        }
+
+
+
         /* *********************************************************Page: 1-- Entry Ends***************************************************************** */
     }
 }

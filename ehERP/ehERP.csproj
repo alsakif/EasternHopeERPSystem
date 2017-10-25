@@ -65,6 +65,12 @@
     <Compile Include="acRec.Designer.cs">
       <DependentUpon>acRec.cs</DependentUpon>
     </Compile>
+    <Compile Include="acRecEntryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acRecEntryEdit.Designer.cs">
+      <DependentUpon>acRecEntryEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="ehHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="acRec.resx">
       <DependentUpon>acRec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acRecEntryEdit.resx">
+      <DependentUpon>acRecEntryEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ehHome.resx">
       <DependentUpon>ehHome.cs</DependentUpon>
