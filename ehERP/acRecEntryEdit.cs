@@ -18,6 +18,8 @@ namespace ehERP
             hidePnl.BringToFront();
         }
 
+        ToolTip tip = new ToolTip();
+
         private void refreshBtn_Click(object sender, EventArgs e)
         {
             SpName.Text = "";
@@ -44,6 +46,11 @@ namespace ehERP
         private void button1_Click(object sender, EventArgs e)
         {
             hidePnl.SendToBack();
+        }
+
+        private void ret_MouseHover(object sender, EventArgs e)
+        {
+            tip.Show("Retrive from the previous Calculation", ret);
         }
     }
 }
