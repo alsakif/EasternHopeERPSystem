@@ -20,6 +20,7 @@ namespace ehERP
             addItemBtn.Enabled = false;//page1: entry
             hidePnl.BringToFront();//page1: entry
             hidePnl01.BringToFront();// page1: entry
+            hidePnl02.SendToBack();
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -38,11 +39,11 @@ namespace ehERP
         {
             try
             {
-                /*con.Open();
+                con.Open();
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $"insert into new_record(ItemType, PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
-                    $"('{c1.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a);" +
+                cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
+                    $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a);" +
                     $" insert into final_rec_record(PartyName,OrderNo,InvoiceNo,Total,Advanced, Date) values " +
                     $"('{pName.Text}','{oNo.Text}','{iNo.Text}','{total.Text}','{advanced.Text}', @a)";
                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = dateTimePicker1.Value.Date;
@@ -56,7 +57,7 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-                con.Close(); */
+                con.Close(); 
 
                 // Enable add item button
                 add.Enabled = true;
@@ -75,7 +76,7 @@ namespace ehERP
         {
             try
             {
-                c1.Text = "";
+                dept.Text = "";
                 pName.Text = "";
                 oNo.Text = "";
                 iNo.Text = "";
@@ -91,7 +92,8 @@ namespace ehERP
                 addItemBtn.Enabled = false;
                 hidePnl.BringToFront(); //checkbox will be hidden
                 hidePnl01.BringToFront(); //total will be hidden
-                checkBox1.Checked = false;
+                cBox1.Checked = false;
+                hidePnl02.SendToBack();
             }
             catch (Exception x)
             {
@@ -105,18 +107,126 @@ namespace ehERP
             /*Retrive previous items data from db and'd show upto invoice number. total will be shown on 
              the total RHS label*/
             hidePnl.SendToBack();
-            checkBox1.Checked = false;
+            cBox1.Checked = false;
             hidePnl01.SendToBack();
-        }
+            hidePnl02.BringToFront();
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            string q1 = $"select * from new_record order by Serial desc limit 1";
+            MySqlCommand cm = new MySqlCommand(q1, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    dept.Text = dr.GetString(2);
+                    pName.Text = dr.GetString(3);
+                    oNo.Text = dr.GetString(4);
+                    iNo.Text = dr.GetString(5);
+                    prName.Text = "";
+                    uPrice.Text = "";
+                    qty.Text = "";
+                    unit.Text = "";
+                    total.Text = "";
+                    advanced.Text = "";
+                    remark.Text = "";
+                }
+                catch (Exception q)
+                {
+                    MessageBox.Show("Errors: " + q);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's no information");
+            }
+            con.Close();
+
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            string q2 = $"select final_rec_record.Total from final_rec_record order by Serial desc limit 1";
+            cm = new MySqlCommand(q2, con);
+            dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    lbltotal.Text = dr.GetString(0);
+                }
+                catch (Exception q)
+                {
+                    MessageBox.Show("Errors: " + q);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's no information");
+            }
+            con.Close();
+
+
+
+        }
+        private void cBox1_CheckedChanged(object sender, EventArgs e)
         {
-            // upon checked changed textbox total will be added with label total. And the label total will show the sum ip of the it.
+            if (cBox1.Checked)
+            {
+                lbltotal.Text = (float.Parse(lbltotal.Text) + float.Parse(total.Text)).ToString();
+            }
         }
 
         private void add_Click(object sender, EventArgs e)
         {
             //update the total from the total label to datbase total on same order and invoice number 
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"update final_rec_record set Total = '{lbltotal.Text}' order by Serial desc limit 1";
+        
+            int x = cmd.ExecuteNonQuery();
+
+            if (x > 0)
+            {
+               // MessageBox.Show("Success");
+            }
+            else
+            {
+                MessageBox.Show("there are some Errors");
+            }
+            con.Close();
+
+
+            try
+            {
+                con.Open();
+             
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
+                    $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a)";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = dateTimePicker1.Value.Date;
+                int y = cmd.ExecuteNonQuery();
+
+                if (y > 0)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
+                con.Close();
+
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errors: " + ex);
+            }
         }
 
         private void eEditBtn_Click(object sender, EventArgs e)
@@ -124,6 +234,8 @@ namespace ehERP
             acRecEntryEdit obj = new acRecEntryEdit();
             obj.Show();
         }
+
+
 
 
 
