@@ -19,7 +19,8 @@ namespace ehERP
             add.Enabled = false;// page1: entry--disable add button initially.
             addItemBtn.Enabled = false;//page1: entry
             hidePnl.BringToFront();//page1: entry
-           // hidePnl01.BringToFront();// page1: entry
+            hidePnl01.BringToFront();// page1: entry
+            hidePnl02.SendToBack();
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -90,8 +91,9 @@ namespace ehERP
                 add.Enabled = false;// disable add button
                 addItemBtn.Enabled = false;
                 hidePnl.BringToFront(); //checkbox will be hidden
-                //hidePnl01.BringToFront(); //total will be hidden
+                hidePnl01.BringToFront(); //total will be hidden
                 cBox1.Checked = false;
+                hidePnl02.SendToBack();
             }
             catch (Exception x)
             {
@@ -106,7 +108,8 @@ namespace ehERP
              the total RHS label*/
             hidePnl.SendToBack();
             cBox1.Checked = false;
-            // hidePnl01.SendToBack();
+            hidePnl01.SendToBack();
+            hidePnl02.BringToFront();
 
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
