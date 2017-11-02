@@ -42,11 +42,12 @@ namespace ehERP
                 con.Open();
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
-                    $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a);" +
+                cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date, Deadline) values" +
+                    $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a, @deadline);" +
                     $" insert into final_rec_record(PartyName,OrderNo,InvoiceNo,Total,Advanced, Date) values " +
                     $"('{pName.Text}','{oNo.Text}','{iNo.Text}','{total.Text}','{advanced.Text}', @a)";
                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = dateTimePicker1.Value.Date;
+                cmd.Parameters.Add("@deadline", MySqlDbType.Date).Value = deadline.Value.Date;
                 int x = cmd.ExecuteNonQuery();
 
                 if (x > 0)
@@ -110,7 +111,7 @@ namespace ehERP
             cBox1.Checked = false;
             hidePnl01.SendToBack();
             hidePnl02.BringToFront();
-
+            recSaveBtn.Enabled = false;
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
