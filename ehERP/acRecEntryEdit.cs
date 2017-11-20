@@ -123,12 +123,12 @@ namespace ehERP
         {
             try
             {
-                /* con.Open();
+                con.Open();
                  MySqlCommand cmd = con.CreateCommand();
                  cmd.CommandType = CommandType.Text;
-                 cmd.CommandText = $"{$"update new_record set Dept = '"}{eC1.Text}', PartyName = '{epName.Text}', OrderNo= '{eoNo.Text}',InvoiceNo= '{eiNo.Text}', ItemName= '{eprName.Text}', UnitPrice= '{euPrice.Text}',Quantity= '{eQty.Text}', Unit= '{eUnit.Text}', Total= '{eTotal.Text}', Remarks= '{eRemarks.Text}',  Date= @a, Deadline=@a1 where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%' ItemName like '%{SprName.Text}%';" +
-                     $"{$"update final_rec_record set PartyName = '"}{epName.Text}', OrderNo= '{eoNo.Text}' InvoiceNo= '{eiNo.Text}',Total= '{eTotal.Text}',Advanced= '{eAdvanced.Text}', Date= @a where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%'";
-                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = eDate.Value.Date;
+                 cmd.CommandText = $"{$"update new_record set Dept = '"}{eC1.Text}', PartyName = '{epName.Text}', OrderNo= '{eoNo.Text}',InvoiceNo= '{eiNo.Text}', ItemName= '{eprName.Text}', UnitPrice= '{euPrice.Text}',Quantity= '{eQty.Text}', Unit= '{eUnit.Text}', Total= '{eTotal.Text}', Remarks= '{eRemarks.Text}',  Date= @a, Deadline=@a1 where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%' and ItemName like '%{SprName.Text}%';" +
+                     $"{$"update final_rec_record set PartyName = '"}{epName.Text}', PartyName = '{epName.Text}', OrderNo= '{eoNo.Text}',InvoiceNo= '{eiNo.Text}', Total= '{eTotal.Text}', Advanced= '{eAdvanced.Text}', Date= @a  where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%'";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = eDate.Value.Date;
                  cmd.Parameters.Add("@a1", MySqlDbType.Date).Value = deadline.Value.Date;
                  int x = cmd.ExecuteNonQuery();
 
@@ -139,25 +139,8 @@ namespace ehERP
                  else
                  {
                      MessageBox.Show("there are some Errors");
-                 } */
+                 } 
 
-
-                string query = "UPDATE new_record SET Remarks= '" + eRemarks.Text + "' WHERE PartyName like '%"+epName.Text+"%'";
-
-                //Open connection
-                con.Open();
-                
-                    //create mysql command
-                    MySqlCommand cmd = new MySqlCommand();
-                    //Assign the query using CommandText
-                    cmd.CommandText = query;
-                    //Assign the connection using Connection
-                    cmd.Connection = con;
-
-                    //Execute query
-                    cmd.ExecuteNonQuery();
-
-                //close connection
                 con.Close();
                 
 
