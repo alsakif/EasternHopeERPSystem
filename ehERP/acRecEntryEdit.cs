@@ -60,7 +60,7 @@ namespace ehERP
             {
                 try
                 {
-                    dateTimePicker2.Text = dr.GetString(1);
+                    eDate.Text = dr.GetString(1);
                     eC1.Text = dr.GetString(2);
                     epName.Text = dr.GetString(3);
                     eoNo.Text = dr.GetString(4);
@@ -119,25 +119,54 @@ namespace ehERP
             sBlnc.Text = (float.Parse(sBlnc.Text) + float.Parse(eTotal.Text)).ToString();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void eSave_Click(object sender, EventArgs e)
         {
-            con.Open();
-            MySqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"{$"update new_record set Dept = '"}{eC1.Text}', PartyName = '{epName.Text}', OrderNo= '{eoNo.Text}',InvoiceNo= '{eiNo.Text}',ItemName= '{eprName.Text}',UnitPrice= '{euPrice.Text}',Quantity= '{eQty.Text}', Unit= '{eUnit.Text}', Total= '{eTotal.Text}',Remarks= '{eRemarks.Text}, Date= @a, Deadline=@a1 where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%' and ItemName like '%{SprName.Text}%';" +
-                $"{$"update final_rec_record set PartyName = '"}{epName.Text}', OrderNo= '{eoNo.Text}', InvoiceNo= '{eiNo.Text}',Total= '{sBlnc.Text}',Advanced= '{eAdvanced.Text}', Date= @a where  PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%'";
-            cmd.Parameters.Add("@a", MySqlDbType.Date).Value = dateTimePicker2.Value.Date;
-            cmd.Parameters.Add("@a1", MySqlDbType.Date).Value = deadline.Value.Date;
-            int x = cmd.ExecuteNonQuery();
+            try
+            {
+                /* con.Open();
+                 MySqlCommand cmd = con.CreateCommand();
+                 cmd.CommandType = CommandType.Text;
+                 cmd.CommandText = $"{$"update new_record set Dept = '"}{eC1.Text}', PartyName = '{epName.Text}', OrderNo= '{eoNo.Text}',InvoiceNo= '{eiNo.Text}', ItemName= '{eprName.Text}', UnitPrice= '{euPrice.Text}',Quantity= '{eQty.Text}', Unit= '{eUnit.Text}', Total= '{eTotal.Text}', Remarks= '{eRemarks.Text}',  Date= @a, Deadline=@a1 where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%' ItemName like '%{SprName.Text}%';" +
+                     $"{$"update final_rec_record set PartyName = '"}{epName.Text}', OrderNo= '{eoNo.Text}' InvoiceNo= '{eiNo.Text}',Total= '{eTotal.Text}',Advanced= '{eAdvanced.Text}', Date= @a where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%'";
+                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = eDate.Value.Date;
+                 cmd.Parameters.Add("@a1", MySqlDbType.Date).Value = deadline.Value.Date;
+                 int x = cmd.ExecuteNonQuery();
 
-            if (x > 0)
-            {
-                MessageBox.Show("Success");
+                 if (x > 0)
+                 {
+                     MessageBox.Show("Success");
+                 }
+                 else
+                 {
+                     MessageBox.Show("there are some Errors");
+                 } */
+
+
+                string query = "UPDATE new_record SET Remarks= '" + eRemarks.Text + "' WHERE PartyName like '%"+epName.Text+"%'";
+
+                //Open connection
+                con.Open();
+                
+                    //create mysql command
+                    MySqlCommand cmd = new MySqlCommand();
+                    //Assign the query using CommandText
+                    cmd.CommandText = query;
+                    //Assign the connection using Connection
+                    cmd.Connection = con;
+
+                    //Execute query
+                    cmd.ExecuteNonQuery();
+
+                //close connection
+                con.Close();
+                
+
             }
-            else
+            catch (Exception a)
             {
-                MessageBox.Show("there are some Errors");
+                MessageBox.Show("Errors: " + a);
             }
+           
             con.Close();
         }
     }

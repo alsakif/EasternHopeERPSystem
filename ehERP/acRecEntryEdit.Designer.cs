@@ -46,6 +46,9 @@
             this.materialLabel33 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel34 = new MaterialSkin.Controls.MaterialLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.deadline = new System.Windows.Forms.DateTimePicker();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.eC1 = new System.Windows.Forms.ComboBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -77,7 +80,7 @@
             this.epName = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel51 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel52 = new MaterialSkin.Controls.MaterialLabel();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.eDate = new System.Windows.Forms.DateTimePicker();
             this.materialLabel55 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel56 = new MaterialSkin.Controls.MaterialLabel();
             this.refreshBtn = new System.Windows.Forms.Button();
@@ -86,10 +89,7 @@
             this.sBlnc = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.ret = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.deadline = new System.Windows.Forms.DateTimePicker();
-            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.eSave = new System.Windows.Forms.Button();
             this.searchPnl.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -407,13 +407,56 @@
             this.panel2.Controls.Add(this.epName);
             this.panel2.Controls.Add(this.materialLabel51);
             this.panel2.Controls.Add(this.materialLabel52);
-            this.panel2.Controls.Add(this.dateTimePicker2);
+            this.panel2.Controls.Add(this.eDate);
             this.panel2.Controls.Add(this.materialLabel55);
             this.panel2.Controls.Add(this.materialLabel56);
             this.panel2.Location = new System.Drawing.Point(310, 118);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(541, 493);
             this.panel2.TabIndex = 2;
+            // 
+            // deadline
+            // 
+            this.deadline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.deadline.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deadline.Checked = false;
+            this.deadline.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deadline.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.deadline.Location = new System.Drawing.Point(211, 435);
+            this.deadline.Name = "deadline";
+            this.deadline.Size = new System.Drawing.Size(220, 22);
+            this.deadline.TabIndex = 152;
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(185, 435);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(13, 19);
+            this.materialLabel3.TabIndex = 151;
+            this.materialLabel3.Text = ":";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(93, 435);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(67, 19);
+            this.materialLabel4.TabIndex = 150;
+            this.materialLabel4.Text = "Deadline";
             // 
             // eC1
             // 
@@ -892,18 +935,18 @@
             this.materialLabel52.TabIndex = 80;
             this.materialLabel52.Text = "Party Name";
             // 
-            // dateTimePicker2
+            // eDate
             // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.eDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Checked = false;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(211, 10);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(220, 22);
-            this.dateTimePicker2.TabIndex = 77;
+            this.eDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eDate.Checked = false;
+            this.eDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.eDate.Location = new System.Drawing.Point(211, 10);
+            this.eDate.Name = "eDate";
+            this.eDate.Size = new System.Drawing.Size(220, 22);
+            this.eDate.TabIndex = 77;
             // 
             // materialLabel55
             // 
@@ -1010,61 +1053,18 @@
             this.ret.Click += new System.EventHandler(this.ret_Click);
             this.ret.MouseHover += new System.EventHandler(this.ret_MouseHover);
             // 
-            // button3
+            // eSave
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(538, 617);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(111, 37);
-            this.button3.TabIndex = 145;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // deadline
-            // 
-            this.deadline.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.deadline.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deadline.Checked = false;
-            this.deadline.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deadline.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.deadline.Location = new System.Drawing.Point(211, 435);
-            this.deadline.Name = "deadline";
-            this.deadline.Size = new System.Drawing.Size(220, 22);
-            this.deadline.TabIndex = 152;
-            // 
-            // materialLabel3
-            // 
-            this.materialLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.materialLabel3.AutoSize = true;
-            this.materialLabel3.Depth = 0;
-            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(185, 435);
-            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(13, 19);
-            this.materialLabel3.TabIndex = 151;
-            this.materialLabel3.Text = ":";
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(93, 435);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(67, 19);
-            this.materialLabel4.TabIndex = 150;
-            this.materialLabel4.Text = "Deadline";
+            this.eSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.eSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.eSave.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eSave.Location = new System.Drawing.Point(538, 617);
+            this.eSave.Name = "eSave";
+            this.eSave.Size = new System.Drawing.Size(111, 37);
+            this.eSave.TabIndex = 145;
+            this.eSave.Text = "Save";
+            this.eSave.UseVisualStyleBackColor = true;
+            this.eSave.Click += new System.EventHandler(this.eSave_Click);
             // 
             // acRecEntryEdit
             // 
@@ -1072,7 +1072,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1151, 666);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.eSave);
             this.Controls.Add(this.ret);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.refreshBtn);
@@ -1134,7 +1134,7 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField epName;
         private MaterialSkin.Controls.MaterialLabel materialLabel51;
         private MaterialSkin.Controls.MaterialLabel materialLabel52;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker eDate;
         private MaterialSkin.Controls.MaterialLabel materialLabel55;
         private MaterialSkin.Controls.MaterialLabel materialLabel56;
         private System.Windows.Forms.Button refreshBtn;
@@ -1143,7 +1143,7 @@
         private System.Windows.Forms.Label sBlnc;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button ret;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button eSave;
         private System.Windows.Forms.CheckBox checkBox1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
