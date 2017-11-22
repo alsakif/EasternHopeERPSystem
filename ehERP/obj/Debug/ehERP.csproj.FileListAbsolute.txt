@@ -34,3 +34,4 @@ D:\Project\ehERP\ehERP\obj\Debug\ehERP.csproj.CoreCompileInputs.cache
 D:\Project\ehERP\ehERP\obj\Debug\ehERP.exe
 D:\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.acRecEntryEdit.resources
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.invoiceEntryEdit.resources

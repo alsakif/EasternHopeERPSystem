@@ -18,9 +18,9 @@ namespace ehERP
             InitializeComponent();
             add.Enabled = false;// page1: entry--disable add button initially.
             addItemBtn.Enabled = false;//page1: entry
-            hidePnl.BringToFront();//page1: entry
+            //hidePnl.BringToFront();//page1: entry
             hidePnl01.BringToFront();// page1: entry
-            hidePnl02.SendToBack();
+            //hidePnl02.SendToBack();
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -91,10 +91,10 @@ namespace ehERP
 
                 add.Enabled = false;// disable add button
                 addItemBtn.Enabled = false;
-                hidePnl.BringToFront(); //checkbox will be hidden
+                //hidePnl.BringToFront(); //checkbox will be hidden
                 hidePnl01.BringToFront(); //total will be hidden
                 cBox1.Checked = false;
-                hidePnl02.SendToBack();
+               // hidePnl02.SendToBack();
             }
             catch (Exception x)
             {
@@ -107,10 +107,10 @@ namespace ehERP
         {
             /*Retrive previous items data from db and'd show upto invoice number. total will be shown on 
              the total RHS label*/
-            hidePnl.SendToBack();
+            //hidePnl.SendToBack();
             cBox1.Checked = false;
             hidePnl01.SendToBack();
-            hidePnl02.BringToFront();
+            //hidePnl02.BringToFront();
             recSaveBtn.Enabled = false;
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
@@ -235,6 +235,23 @@ namespace ehERP
             acRecEntryEdit obj = new acRecEntryEdit();
             obj.Show();
         }
+
+        private void eSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iEditBtn_Click_1(object sender, EventArgs e)
+        {
+            invoiceEntryEdit obj = new invoiceEntryEdit();
+            obj.Show();
+        }
+
+
+
+
+
+
 
 
 
