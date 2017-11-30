@@ -18,9 +18,9 @@ namespace ehERP
             InitializeComponent();
             add.Enabled = false;// page1: entry--disable add button initially.
             addItemBtn.Enabled = false;//page1: entry
-            //hidePnl.BringToFront();//page1: entry
+            hidePnl.SendToBack();//page1: entry
             hidePnl01.BringToFront();// page1: entry
-            //hidePnl02.SendToBack();
+            hidePnl02.BringToFront();
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -44,8 +44,8 @@ namespace ehERP
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date, Deadline) values" +
                     $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a, @deadline);" +
-                    $" insert into final_rec_record(PartyName,OrderNo,InvoiceNo,Total,Advanced, Date) values " +
-                    $"('{pName.Text}','{oNo.Text}','{iNo.Text}','{total.Text}','{advanced.Text}', @a)";
+                    $" insert into final_rec_record(PartyName,OrderNo,InvoiceNo,Total,Advanced, Balance, Date) values " +
+                    $"('{pName.Text}','{oNo.Text}','{iNo.Text}','{total.Text}','{advanced.Text}','{advanced.Text}', @a)";
                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = dateTimePicker1.Value.Date;
                 cmd.Parameters.Add("@deadline", MySqlDbType.Date).Value = deadline.Value.Date;
                 int x = cmd.ExecuteNonQuery();
@@ -91,10 +91,11 @@ namespace ehERP
 
                 add.Enabled = false;// disable add button
                 addItemBtn.Enabled = false;
-                //hidePnl.BringToFront(); //checkbox will be hidden
+                hidePnl.SendToBack(); //checkbox will be hidden
                 hidePnl01.BringToFront(); //total will be hidden
                 cBox1.Checked = false;
-               // hidePnl02.SendToBack();
+                hidePnl02.BringToFront();
+                recSaveBtn.Enabled = true;
             }
             catch (Exception x)
             {
@@ -107,10 +108,10 @@ namespace ehERP
         {
             /*Retrive previous items data from db and'd show upto invoice number. total will be shown on 
              the total RHS label*/
-            //hidePnl.SendToBack();
+            hidePnl.BringToFront();
             cBox1.Checked = false;
             hidePnl01.SendToBack();
-            //hidePnl02.BringToFront();
+            hidePnl02.SendToBack();
             recSaveBtn.Enabled = false;
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
@@ -200,10 +201,10 @@ namespace ehERP
             }
             con.Close();
 
-
+            con.Open();
             try
             {
-                con.Open();
+                
              
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
@@ -219,7 +220,7 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-                con.Close();
+               
 
                 
 
@@ -228,6 +229,7 @@ namespace ehERP
             {
                 MessageBox.Show("Errors: " + ex);
             }
+            con.Close();
         }
 
         private void eEditBtn_Click(object sender, EventArgs e)
@@ -236,10 +238,6 @@ namespace ehERP
             obj.Show();
         }
 
-        private void eSearch_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void iEditBtn_Click_1(object sender, EventArgs e)
         {
@@ -248,15 +246,218 @@ namespace ehERP
         }
 
 
+        /* *********************************************************Orderpage Ends***************************************************************** */
+        /* *********************************************************Shipment page starts***************************************************************** */
+
+        private void shpSearch_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string q1 = $"select * from new_record where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%'and ItemName like '%{SprName.Text}%'";
+            MySqlCommand cm = new MySqlCommand(q1, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    
+                    shpDept.Text = dr.GetString(2);
+                    shpPn.Text = dr.GetString(3);
+                    shpOn.Text = dr.GetString(4);
+                    shpIn.Text = dr.GetString(6);
+                    shpQty.Text = dr.GetString(8);
+                    UpQty.Text = dr.GetString(9);
+                    shpUnit.Text = dr.GetString(10);
+                    label5.Text = dr.GetString(10);
+
+
+                }
+                catch (Exception q)
+                {
+                    MessageBox.Show("Errors: " + q);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("There's no information");
+            }
+            con.Close();
+
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                UpQty.Text = (float.Parse(UpQty.Text) + float.Parse(shipmentQty.Text)).ToString();
+            }
+        }
+
+        private void shpSave_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            try
+            {
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"insert into shipment_record(PartyName, OrderNo,ItemName,shipmentQty,shipmentNo,Remarks, Date) values" +
+                    $"('{shpPn.Text}','{shpOn.Text}','{shpIn.Text}','{shipmentQty.Text}','{shipNo.Text}','{shpRemarks.Text}', @a)";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = shpDate.Value.Date;
+                int y = cmd.ExecuteNonQuery();
+
+                if (y > 0)
+                {
+                   // MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
 
 
 
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errors: " + ex);
+            }
+            con.Close();
+
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"{$"update new_record set UpdatedQty = '"}{UpQty.Text}' where PartyName like '%{SpName.Text}%' and OrderNo like '%{SoNo.Text}%' and InvoiceNo like '%{SiNo.Text}%' and ItemName like '%{SprName.Text}%';";
+                int x = cmd.ExecuteNonQuery();
+
+                if (x > 0)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
+
+                con.Close();
+
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Errors: " + a);
+            }
+
+            con.Close();
+        }
+
+
+        /* *********************************************************Shipment page Ends***************************************************************** */
+        /* *********************************************************Receipt page starts***************************************************************** */
+
+
+        private void rSearch_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string q1 = $"select * from final_rec_record where PartyName like '%{rSpName.Text}%' and OrderNo like '%{rSoNo.Text}%' and InvoiceNo like '%{rSiNo.Text}%'";
+            MySqlCommand cm = new MySqlCommand(q1, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    rPn.Text = dr.GetString(2);
+                    rOn.Text = dr.GetString(3);
+                    rTamt.Text = dr.GetString(5);
+                    rTblnc.Text = dr.GetString(7);
+                    UpdatedBlnc.Text = dr.GetString(7);
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Errors: " + a);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to show");
+            }
+            con.Close();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                UpdatedBlnc.Text = (float.Parse(UpdatedBlnc.Text) + float.Parse(UpBlnc.Text)).ToString();
+            }
+        }
+
+        private void rSave_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            try
+            {
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"insert into payment_record(PartyName, OrderNo,PaymentAmt,paymentNo,Remarks, Date) values" +
+                    $"('{rPn.Text}','{rOn.Text}','{UpBlnc.Text}','{payNo.Text}','{rRemarks.Text}', @a)";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = rDate.Value.Date;
+                int y = cmd.ExecuteNonQuery();
+
+                if (y > 0)
+                {
+                    // MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
 
 
 
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errors: " + ex);
+            }
+            con.Close();
 
-        /* *********************************************************Page: 1-- Entry Ends***************************************************************** */
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"{$"update final_rec_record set Balance = '"}{UpdatedBlnc.Text}' where PartyName like '%{rSpName.Text}%' and OrderNo like '%{rSoNo.Text}%' and InvoiceNo like '%{rSiNo.Text}%';";
+                int x = cmd.ExecuteNonQuery();
+
+                if (x > 0)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
+
+                con.Close();
+
+
+            }
+            catch (Exception a)
+            {
+                MessageBox.Show("Errors: " + a);
+            }
+
+            con.Close();
+        }
     }
 }
