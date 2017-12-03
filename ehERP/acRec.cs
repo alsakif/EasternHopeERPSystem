@@ -21,6 +21,8 @@ namespace ehERP
             hidePnl.SendToBack();//page1: entry
             hidePnl01.BringToFront();// page1: entry
             hidePnl02.BringToFront();
+            addNew.Enabled = false;
+            addP.Enabled = false;
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -169,8 +171,6 @@ namespace ehERP
                 MessageBox.Show("There's no information");
             }
             con.Close();
-
-
 
         }
         private void cBox1_CheckedChanged(object sender, EventArgs e)
@@ -457,6 +457,163 @@ namespace ehERP
                 MessageBox.Show("Errors: " + a);
             }
 
+            con.Close();
+            /* *********************************************************Receipt page ends***************************************************************** */
+        }
+
+        private void insertionDn_CheckedChanged(object sender, EventArgs e)
+        {
+            if(insertionDn.Checked)
+            {
+                iStatus.Text = (float.Parse(iStatus.Text) + float.Parse(iTotal.Text)).ToString();
+            }
+        }
+
+        private void invSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"insert into invoice_enrty(Dept,PartyName, OrderNo,InvoiceNo,ItemName,ItemType,UnitPrice,inQty, Unit,upBalance, Remarks, Date) values" +
+                    $"('{iDept.Text}','{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a);" +
+                    $" insert into final_inv_record(PartyName,OrderNo,InvoiceNo,Total,Date) values " +
+                    $"('{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iTotal.Text}', @a)";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = iDate.Value.Date;
+                
+                int x = cmd.ExecuteNonQuery();
+
+                if (x > 0)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
+                con.Close();
+
+                // Enable add item button
+                addP.Enabled = true;
+                addNew.Enabled = true;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errors: " + ex);
+            }
+        }
+
+        private void addNew_Click(object sender, EventArgs e)
+        {
+            insertionDn.Checked = false;
+            invSave.Enabled = false;
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            string q1 = $"select * from invoice_enrty order by Serial desc limit 1";
+            MySqlCommand cm = new MySqlCommand(q1, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    iDept.Text = dr.GetString(2);
+                    ipName.Text = dr.GetString(3);
+                    inoNo.Text = dr.GetString(4);
+                    iiNo.Text = dr.GetString(5);
+                    iprName.Text = "";
+                    iType.Text = "";
+                    iuPrice.Text = "";
+                    iQty.Text = "";
+                    iUnit.Text = "";
+                    iTotal.Text = "";
+                    iRemarks.Text = "";
+                }
+                catch (Exception q)
+                {
+                    MessageBox.Show("Errors: " + q);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's no information");
+            }
+            con.Close();
+
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            string q2 = $"select final_inv_record.Total from final_inv_record order by Serial desc limit 1";
+            cm = new MySqlCommand(q2, con);
+            dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    iStatus.Text = dr.GetString(0);
+                }
+                catch (Exception q)
+                {
+                    MessageBox.Show("Errors: " + q);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's no information");
+            }
+            con.Close();
+
+        }
+
+        private void addP_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"update final_inv_record set Total = '{iStatus.Text}' order by Serial desc limit 1";
+
+            int x = cmd.ExecuteNonQuery();
+
+            if (x > 0)
+            {
+                // MessageBox.Show("Success");
+            }
+            else
+            {
+                MessageBox.Show("there are some Errors");
+            }
+            con.Close();
+
+            con.Open();
+            try
+            {
+                
+               
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = $"insert into invoice_enrty(Dept,PartyName, OrderNo,InvoiceNo,ItemName,ItemType,UnitPrice,inQty, Unit,upBalance, Remarks, Date) values" +
+                    $"('{iDept.Text}','{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a)";
+                cmd.Parameters.Add("@a", MySqlDbType.Date).Value = iDate.Value.Date;
+
+                int y = cmd.ExecuteNonQuery();
+
+                if (y > 0)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("there are some Errors");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errors: " + ex);
+            }
             con.Close();
         }
     }
