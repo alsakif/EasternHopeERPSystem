@@ -23,6 +23,9 @@ namespace ehERP
             hidePnl02.BringToFront();
             addNew.Enabled = false;
             addP.Enabled = false;
+            invHidePnl.BringToFront();
+            invHidePnl01.BringToFront();
+            inSearch.Enabled = false;
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -60,12 +63,12 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-                con.Close(); 
+                con.Close();
 
                 // Enable add item button
                 add.Enabled = true;
                 addItemBtn.Enabled = true;
-               
+
 
             }
             catch (Exception ex)
@@ -103,7 +106,7 @@ namespace ehERP
             {
                 // MessageBox.Show("Errors: " + x);
             }
-            
+
         }
 
         private void addItemBtn_Click(object sender, EventArgs e)
@@ -188,12 +191,12 @@ namespace ehERP
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = $"update final_rec_record set Total = '{lbltotal.Text}' order by Serial desc limit 1";
-        
+
             int x = cmd.ExecuteNonQuery();
 
             if (x > 0)
             {
-               // MessageBox.Show("Success");
+                // MessageBox.Show("Success");
             }
             else
             {
@@ -204,8 +207,8 @@ namespace ehERP
             con.Open();
             try
             {
-                
-             
+
+
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into new_record(Dept,PartyName, OrderNo,InvoiceNo,ItemName,UnitPrice,Quantity, Unit,Total, Remarks, Date) values" +
                     $"('{dept.Text}','{pName.Text}','{oNo.Text}','{iNo.Text}','{prName.Text}','{uPrice.Text}','{qty.Text}','{unit.Text}','{total.Text}','{remark.Text}', @a)";
@@ -220,9 +223,9 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-               
 
-                
+
+
 
             }
             catch (Exception ex)
@@ -260,7 +263,7 @@ namespace ehERP
             {
                 try
                 {
-                    
+
                     shpDept.Text = dr.GetString(2);
                     shpPn.Text = dr.GetString(3);
                     shpOn.Text = dr.GetString(4);
@@ -289,7 +292,7 @@ namespace ehERP
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 UpQty.Text = (float.Parse(UpQty.Text) + float.Parse(shipmentQty.Text)).ToString();
             }
@@ -310,7 +313,7 @@ namespace ehERP
 
                 if (y > 0)
                 {
-                   // MessageBox.Show("Success");
+                    // MessageBox.Show("Success");
                 }
                 else
                 {
@@ -389,6 +392,30 @@ namespace ehERP
                 MessageBox.Show("Nothing to show");
             }
             con.Close();
+
+            con.Open();
+            string q2 = $"select * from final_inv_record where PartyName like '%{rSpName.Text}%' and OrderNo like '%{rSoNo.Text}%'";
+            cm = new MySqlCommand(q2, con);
+            dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    rTspnt.Text = dr.GetString(4);
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Errors: " + a);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to show");
+            }
+            con.Close();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -396,15 +423,39 @@ namespace ehERP
             if (checkBox2.Checked)
             {
                 UpdatedBlnc.Text = (float.Parse(UpdatedBlnc.Text) + float.Parse(UpBlnc.Text)).ToString();
+                rTblnc.Text = UpdatedBlnc.Text;
             }
         }
 
         private void rSave_Click(object sender, EventArgs e)
         {
+            
+
+            //calculation +/- balance
+            rBalance.Text = (float.Parse(rTblnc.Text) - float.Parse(rTspnt.Text)).ToString();
+
+            //Update the ac receivable 
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"update final_rec_record set ReceivableBalance  = '{rBalance.Text}' where PartyName like '%{rPn.Text}%' and OrderNo like '%{rOn.Text}%'";
+
+            int x = cmd.ExecuteNonQuery();
+
+            if (x > 0)
+            {
+                MessageBox.Show("Alhamdulillah!! Saved Successfully!");
+            }
+            else
+            {
+                MessageBox.Show("there are some Errors");
+            }
+            con.Close();
+
             con.Open();
             try
             {
-                MySqlCommand cmd = con.CreateCommand();
+                cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into payment_record(PartyName, OrderNo,PaymentAmt,paymentNo,Remarks, Date) values" +
@@ -434,12 +485,12 @@ namespace ehERP
             try
             {
                 con.Open();
-                MySqlCommand cmd = con.CreateCommand();
+                cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"{$"update final_rec_record set Balance = '"}{UpdatedBlnc.Text}' where PartyName like '%{rSpName.Text}%' and OrderNo like '%{rSoNo.Text}%' and InvoiceNo like '%{rSiNo.Text}%';";
-                int x = cmd.ExecuteNonQuery();
+                int y = cmd.ExecuteNonQuery();
 
-                if (x > 0)
+                if (y > 0)
                 {
                     MessageBox.Show("Success");
                 }
@@ -456,19 +507,24 @@ namespace ehERP
             {
                 MessageBox.Show("Errors: " + a);
             }
-
+          
             con.Close();
             /* *********************************************************Receipt page ends***************************************************************** */
         }
 
-        private void insertionDn_CheckedChanged(object sender, EventArgs e)
+
+        /* *********************************************************Invoice page starts***************************************************************** */
+        private void iQty_TextChanged(object sender, EventArgs e)
         {
-            if(insertionDn.Checked)
+            try
             {
-                iStatus.Text = (float.Parse(iStatus.Text) + float.Parse(iTotal.Text)).ToString();
+                iTotal.Text = (float.Parse(iuPrice.Text) * float.Parse(iQty.Text)).ToString(); // total = qty X unit price
+            }
+            catch (Exception x)
+            {
+                // MessageBox.Show("Errors: " + x);
             }
         }
-
         private void invSave_Click(object sender, EventArgs e)
         {
             try
@@ -477,11 +533,11 @@ namespace ehERP
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into invoice_enrty(Dept,PartyName, OrderNo,InvoiceNo,ItemName,ItemType,UnitPrice,inQty, Unit,upBalance, Remarks, Date) values" +
-                    $"('{iDept.Text}','{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a);" +
-                    $" insert into final_inv_record(PartyName,OrderNo,InvoiceNo,Total,Date) values " +
-                    $"('{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iTotal.Text}', @a)";
+                    $"('{iDept.Text}','{ipartyName.Text}','{inorderNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a);" +
+                    $" insert into final_inv_record(PartyName,OrderNo,Total,Date) values " +
+                    $"('{ipartyName.Text}','{inorderNo.Text}','{iTotal.Text}', @a)";
                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = iDate.Value.Date;
-                
+
                 int x = cmd.ExecuteNonQuery();
 
                 if (x > 0)
@@ -497,6 +553,7 @@ namespace ehERP
                 // Enable add item button
                 addP.Enabled = true;
                 addNew.Enabled = true;
+                invHidePnl01.SendToBack();
 
 
             }
@@ -522,8 +579,8 @@ namespace ehERP
                 try
                 {
                     iDept.Text = dr.GetString(2);
-                    ipName.Text = dr.GetString(3);
-                    inoNo.Text = dr.GetString(4);
+                    ipartyName.Text = dr.GetString(3);
+                    inorderNo.Text = dr.GetString(4);
                     iiNo.Text = dr.GetString(5);
                     iprName.Text = "";
                     iType.Text = "";
@@ -574,7 +631,7 @@ namespace ehERP
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"update final_inv_record set Total = '{iStatus.Text}' order by Serial desc limit 1";
+            cmd.CommandText = $"update final_inv_record set Total = '{iStatus.Text}' where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
 
             int x = cmd.ExecuteNonQuery();
 
@@ -591,11 +648,11 @@ namespace ehERP
             con.Open();
             try
             {
-                
-               
+
+
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = $"insert into invoice_enrty(Dept,PartyName, OrderNo,InvoiceNo,ItemName,ItemType,UnitPrice,inQty, Unit,upBalance, Remarks, Date) values" +
-                    $"('{iDept.Text}','{ipName.Text}','{inoNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a)";
+                    $"('{iDept.Text}','{ipartyName.Text}','{inorderNo.Text}','{iiNo.Text}','{iprName.Text}','{iType.Text}','{iuPrice.Text}','{iQty.Text}','{iUnit.Text}','{iTotal.Text}','{iRemarks.Text}', @a)";
                 cmd.Parameters.Add("@a", MySqlDbType.Date).Value = iDate.Value.Date;
 
                 int y = cmd.ExecuteNonQuery();
@@ -608,7 +665,7 @@ namespace ehERP
                 {
                     MessageBox.Show("there are some Errors");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -616,5 +673,149 @@ namespace ehERP
             }
             con.Close();
         }
+
+        private void insertionDn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (insertionDn.Checked)
+            {
+                iStatus.Text = (float.Parse(iStatus.Text) + float.Parse(iTotal.Text)).ToString();
+
+            }
+        }
+
+
+
+        private void inSearch_Click(object sender, EventArgs e)
+        {
+            
+
+            con.Open();
+            string q2 = $"select * from final_inv_record where PartyName like '%{ipName.Text}%' and OrderNo like '%{inoNo.Text}%'";
+            MySqlCommand cm = new MySqlCommand(q2, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    MessageBox.Show("SubhhanAllah !!! The order Exists!! :)");
+                    ipartyName.Text = dr.GetString(2);
+                    inorderNo.Text = dr.GetString(3);
+                    invSave.Enabled = false;
+                    addP.Enabled = true;
+                    invHidePnl01.SendToBack();
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Errors: " + a);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("You are making the invoice for the first time for this order.");
+                invSave.Enabled = true;
+                addP.Enabled = false;
+            }
+            con.Close();
+        }
+
+        private void btnSaveDtl_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string q1 = $"select * from final_rec_record where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
+            MySqlCommand cm = new MySqlCommand(q1, con);
+            MySqlDataReader dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    invPname.Text = dr.GetString(2);
+                    invOno.Text = dr.GetString(3);
+                    orderTotal.Text = dr.GetString(7);
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Errors: " + a);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to show");
+            }
+            con.Close();
+
+            con.Open();
+            string q2 = $"select * from final_inv_record where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
+            cm = new MySqlCommand(q2, con);
+            dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                try
+                {
+                    TotalSpent.Text = dr.GetString(4);
+
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Errors: " + a);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to show");
+            }
+            con.Close();
+
+            //Calculate +/-balance
+            Balance.Text = (float.Parse(orderTotal.Text) - float.Parse(TotalSpent.Text)).ToString();
+           
+            //Update the ac receivable 
+            con.Open();
+            MySqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = $"update final_rec_record set ReceivableBalance  = '{Balance.Text}' where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
+
+            int x = cmd.ExecuteNonQuery();
+
+            if (x > 0)
+            {
+                MessageBox.Show("Alhamdulillah!! Saved Successfully!");
+            }
+            else
+            {
+                MessageBox.Show("there are some Errors");
+            }
+            con.Close();
+
+        }
+
+        private void chkRegular_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkRegular.Checked)
+            {
+                invHidePnl.SendToBack();
+                inSearch.Enabled = true;
+                invSave.Enabled = false;
+                addP.Enabled = false;
+                chkExcep.Checked = false;
+            }
+        }
+
+        private void chkExcep_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkExcep.Checked)
+            {
+                inSearch.Enabled = false;
+                chkRegular.Checked = false;
+                invSave.Enabled = true;
+                invHidePnl.BringToFront();
+            }
+        }
     }
-}
+
+   }

@@ -83,6 +83,16 @@ namespace ehERP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_binoculars_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-binoculars-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Circled_Down_Left_30 {
             get {
                 object obj = ResourceManager.GetObject("icons8-Circled Down Left-30", resourceCulture);
@@ -96,6 +106,56 @@ namespace ehERP.Properties {
         internal static System.Drawing.Bitmap icons8_Plus_40_1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-Plus-40(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_save_as_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-save-as-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_save_as_80 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-save-as-80", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_save_close_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-save-close-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_save_close_100_1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-save-close-100(1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_save_filled_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-save-filled-40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +183,29 @@ namespace ehERP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-search-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_search_4_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-search(4)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-search-40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
