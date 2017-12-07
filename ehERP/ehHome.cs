@@ -23,6 +23,7 @@ namespace ehERP
         {
             selector.Height = pnlDash.Height;
             selector.Top = pnlDash.Top;
+            ehHomePnl1.BringToFront();
         }
 
         private void pnlRec_Click(object sender, EventArgs e)

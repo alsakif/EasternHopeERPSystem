@@ -113,6 +113,16 @@ namespace ehERP.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_refresh_shield_filled_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-refresh-shield-filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_save_as_40 {
             get {
                 object obj = ResourceManager.GetObject("icons8-save-as-40", resourceCulture);
@@ -206,6 +216,26 @@ namespace ehERP.Properties {
         internal static System.Drawing.Bitmap icons8_search_40 {
             get {
                 object obj = ResourceManager.GetObject("icons8-search-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_transaction_filled_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-transaction-filled-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_transaction_filled_32_1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-transaction-filled-32(1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
