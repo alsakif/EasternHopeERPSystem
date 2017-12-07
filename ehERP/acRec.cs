@@ -434,11 +434,31 @@ namespace ehERP
             //calculation +/- balance
             rBalance.Text = (float.Parse(rTblnc.Text) - float.Parse(rTspnt.Text)).ToString();
 
+            //calculating acount status
+            if (float.Parse(rBalance.Text) < 0)
+            {
+                acStatus.Text = "Neg";
+            }
+            else
+            {
+                acStatus.Text = "Pos";
+            }
+            //calculating deal status
+
+            if (float.Parse(orderTotal.Text) >= float.Parse(totalDealAmt.Text))
+            {
+                dealStatus.Text = "Complete";
+            }
+            else
+            {
+                dealStatus.Text = "Incomplete";
+            }
+
             //Update the ac receivable 
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"update final_rec_record set ReceivableBalance  = '{rBalance.Text}' where PartyName like '%{rPn.Text}%' and OrderNo like '%{rOn.Text}%'";
+            cmd.CommandText = $"{$"update final_rec_record set ReceivableBalance = '"}{Balance.Text}', AccountStatus = '{acStatus.Text}', DealStatus= '{dealStatus.Text}' where PartyName like '%{rPn.Text}%' and OrderNo like '%{rOn.Text}%'";
 
             int x = cmd.ExecuteNonQuery();
 
@@ -733,6 +753,7 @@ namespace ehERP
                 {
                     invPname.Text = dr.GetString(2);
                     invOno.Text = dr.GetString(3);
+                    totalDealAmt.Text = dr.GetString(5);
                     orderTotal.Text = dr.GetString(7);
                 }
                 catch (Exception a)
@@ -773,12 +794,30 @@ namespace ehERP
 
             //Calculate +/-balance
             Balance.Text = (float.Parse(orderTotal.Text) - float.Parse(TotalSpent.Text)).ToString();
-           
+            //calculating acount status
+            if(float.Parse(Balance.Text)<0)
+            {
+                iacStatus.Text = "Neg";
+            }
+            else
+            {
+                iacStatus.Text = "Pos";
+            }
+           //calculating deal status
+
+            if(float.Parse(orderTotal.Text) >= float.Parse(totalDealAmt.Text))
+            {
+                idealStatus.Text = "Complete";
+            }
+            else
+            {
+                idealStatus.Text = "Incomplete";
+            }
             //Update the ac receivable 
             con.Open();
             MySqlCommand cmd = con.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = $"update final_rec_record set ReceivableBalance  = '{Balance.Text}' where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
+            cmd.CommandText = $"{$"update final_rec_record set ReceivableBalance = '"}{Balance.Text}', AccountStatus = '{iacStatus.Text}', DealStatus= '{idealStatus.Text}' where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
 
             int x = cmd.ExecuteNonQuery();
 
@@ -814,6 +853,36 @@ namespace ehERP
                 chkRegular.Checked = false;
                 invSave.Enabled = true;
                 invHidePnl.BringToFront();
+            }
+        }
+        /* *********************************************************Invoice page ends***************************************************************** */
+        /* *********************************************************Report page starts***************************************************************** */
+        private void recReport_Click(object sender, EventArgs e)
+        {
+            string query = @"select * from purchase where Date BETWEEN @startDate AND @endDate";
+            using (MySqlConnection conn = new MySqlConnection(@"datasource=localhost; port = 3306; database=eastern_hope; username= root; password=;"))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@startDate", fromDate.Value);
+                    cmd.Parameters.AddWithValue("@endDate", toDate.Value);
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        DataTable dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                        conn.Close();
+                    }
+                    catch (MySqlException)
+                    {
+                        throw;
+                    }
+                }
             }
         }
     }
