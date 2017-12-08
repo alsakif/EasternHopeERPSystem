@@ -859,15 +859,15 @@ namespace ehERP
         /* *********************************************************Report page starts***************************************************************** */
         private void recReport_Click(object sender, EventArgs e)
         {
-            string query = @"select * from purchase where Date BETWEEN @startDate AND @endDate";
-            using (MySqlConnection conn = new MySqlConnection(@"datasource=localhost; port = 3306; database=eastern_hope; username= root; password=;"))
+            string query = @"select PartyName, OrderNo, Total, Balance, ReceivableBalance from final_rec_record where date(Date) = date(@startDate)";
+            using (MySqlConnection conn = new MySqlConnection(@"datasource=localhost; port = 3306; database=eh_db; username= root; password=;"))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = conn;
                     cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@startDate", fromDate.Value);
-                    cmd.Parameters.AddWithValue("@endDate", toDate.Value);
+                    cmd.Parameters.AddWithValue("@startDate", repDate.Value);
+                  
                     try
                     {
                         conn.Open();
@@ -875,7 +875,7 @@ namespace ehERP
                         DataTable dt = new DataTable();
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(dt);
-                        dataGridView1.DataSource = dt;
+                        ReportGrid.DataSource = dt;
                         conn.Close();
                     }
                     catch (MySqlException)
@@ -883,6 +883,67 @@ namespace ehERP
                         throw;
                     }
                 }
+            }
+        }
+
+        private void payReport_Click(object sender, EventArgs e)
+        {
+            string query = @"select PartyName,OrderNo,Total from final_inv_record where date(Date) = date(@startDate)";
+            using (MySqlConnection conn = new MySqlConnection(@"datasource=localhost; port = 3306; database=eh_db; username= root; password=;"))
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@startDate", repDate.Value);
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        DataTable dt = new DataTable();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(dt);
+                        ReportGrid.DataSource = dt;
+                        conn.Close();
+                    }
+                    catch (MySqlException)
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private void excelBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                app.Visible = true;
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Exported from EasternHopeERPS";
+                for (int i = 1; i < ReportGrid.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = ReportGrid.Columns[i - 1].HeaderText;
+                }
+                for (int i = 0; i < ReportGrid.Rows.Count - 1; i++)
+                {
+                    for (int j = 0; j < ReportGrid.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = ReportGrid.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                workbook.SaveAs("c:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                app.Quit();
+            }
+            catch (Exception a)
+            {
+
             }
         }
     }
