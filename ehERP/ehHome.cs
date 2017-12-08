@@ -33,12 +33,6 @@ namespace ehERP
             acRec1.BringToFront();
         }
 
-        private void pnlPay_Click(object sender, EventArgs e)
-        {
-            selector.Height = pnlPay.Height;
-            selector.Top = pnlPay.Top;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
