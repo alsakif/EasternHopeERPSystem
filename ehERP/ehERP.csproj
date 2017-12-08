@@ -188,5 +188,8 @@
   <ItemGroup>
     <None Include="Resources\icons8-refresh-shield-filled-50.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-microsoft-excel-filled-50.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
