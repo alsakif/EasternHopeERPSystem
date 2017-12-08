@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.selector = new System.Windows.Forms.Panel();
-            this.pnlPay = new System.Windows.Forms.Button();
             this.pnlRec = new System.Windows.Forms.Button();
             this.pnlDash = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -47,7 +46,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(70)))), ((int)(((byte)(78)))));
             this.panel1.Controls.Add(this.selector);
-            this.panel1.Controls.Add(this.pnlPay);
             this.panel1.Controls.Add(this.pnlRec);
             this.panel1.Controls.Add(this.pnlDash);
             this.panel1.Controls.Add(this.panel3);
@@ -65,24 +63,6 @@
             this.selector.Name = "selector";
             this.selector.Size = new System.Drawing.Size(5, 37);
             this.selector.TabIndex = 2;
-            // 
-            // pnlPay
-            // 
-            this.pnlPay.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPay.FlatAppearance.BorderSize = 0;
-            this.pnlPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pnlPay.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlPay.ForeColor = System.Drawing.Color.White;
-            this.pnlPay.Image = global::ehERP.Properties.Resources.Cash_in_Hand_32px;
-            this.pnlPay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.pnlPay.Location = new System.Drawing.Point(0, 238);
-            this.pnlPay.Name = "pnlPay";
-            this.pnlPay.Size = new System.Drawing.Size(199, 39);
-            this.pnlPay.TabIndex = 2;
-            this.pnlPay.Text = "     A/C Payable";
-            this.pnlPay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.pnlPay.UseVisualStyleBackColor = true;
-            this.pnlPay.Click += new System.EventHandler(this.pnlPay_Click);
             // 
             // pnlRec
             // 
@@ -204,7 +184,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel selector;
-        private System.Windows.Forms.Button pnlPay;
         private System.Windows.Forms.Button pnlRec;
         private System.Windows.Forms.Button pnlDash;
         private System.Windows.Forms.Panel panel3;
