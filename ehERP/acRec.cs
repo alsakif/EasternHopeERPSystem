@@ -26,6 +26,7 @@ namespace ehERP
             invHidePnl.BringToFront();
             invHidePnl01.BringToFront();
             inSearch.Enabled = false;
+            invSave.Enabled = false;
         }
 
         /* ************************************************** page 1 : entry starts************************************************************************* */
@@ -862,6 +863,40 @@ namespace ehERP
                 invHidePnl.BringToFront();
             }
         }
+
+        private void invRefresh_Click(object sender, EventArgs e)
+        {
+            ipartyName.Text = "";
+            inorderNo.Text = "";
+            iiNo.Text = "";
+            iprName.Text = "";
+            iType.Text = "";
+            iuPrice.Text = "";
+            iQty.Text = "";
+            iUnit.Text = "";
+            iTotal.Text = "";
+            iRemarks.Text = "";
+            ipName.Text = "";
+            inoNo.Text = "";
+            //******************
+            invPname.Text = "...";
+            invOno.Text = "...";
+            totalDealAmt.Text = "...";
+            orderTotal.Text = "...";
+            TotalSpent.Text = "...";
+            Balance.Text = "...";
+            iacStatus.Text = "...";
+            idealStatus.Text = "...";
+            iStatus.Text = ".......";
+
+            chkRegular.Checked = false;
+            chkExcep.Checked = false;
+            insertionDn.Checked = false;
+            invHidePnl.BringToFront();
+            invHidePnl01.BringToFront();
+            invSave.Enabled = false;
+            addP.Enabled = false;
+        }
         /* *********************************************************Invoice page ends***************************************************************** */
         /* *********************************************************Report page starts***************************************************************** */
         private void recReport_Click(object sender, EventArgs e)
@@ -952,6 +987,12 @@ namespace ehERP
             {
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //refresh
+
         }
     }
 

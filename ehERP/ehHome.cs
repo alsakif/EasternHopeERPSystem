@@ -14,6 +14,7 @@ namespace ehERP
     {
         public ehHome()
         {
+           
             InitializeComponent();
             selector.Height = pnlDash.Height;
             selector.Top = pnlDash.Top;
@@ -41,6 +42,13 @@ namespace ehERP
         private void GetMin()
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            LoginPage ob = new LoginPage();
+            ob.Show();
         }
     }
 }

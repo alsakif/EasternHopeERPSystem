@@ -35,3 +35,4 @@ D:\Project\ehERP\ehERP\obj\Debug\ehERP.pdb
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.acRecEntryEdit.resources
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.invoiceEntryEdit.resources
 F:\Project\ehERP\ehERP\obj\Debug\ehERP.ehHomePnl.resources
+F:\Project\ehERP\ehERP\obj\Debug\ehERP.LoginPage.resources

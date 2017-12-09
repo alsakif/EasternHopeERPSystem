@@ -259,5 +259,15 @@ namespace ehERP.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ribbon_label_design_by_Vexels {
+            get {
+                object obj = ResourceManager.GetObject("ribbon-label-design-by-Vexels", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
