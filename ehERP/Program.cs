@@ -16,7 +16,7 @@ namespace ehERP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ehHome());
+            Application.Run(new LoginPage());
         }
     }
 }

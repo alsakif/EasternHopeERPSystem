@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ehHome));
             this.panel1 = new System.Windows.Forms.Panel();
             this.selector = new System.Windows.Forms.Panel();
             this.pnlRec = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.acRec1 = new ehERP.acRec();
             this.ehHomePnl1 = new ehERP.ehHomePnl();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -119,6 +121,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button2);
             this.panel4.Controls.Add(this.button1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(199, 10);
@@ -146,7 +149,7 @@
             // acRec1
             // 
             this.acRec1.BackColor = System.Drawing.Color.White;
-            this.acRec1.Location = new System.Drawing.Point(199, 49);
+            this.acRec1.Location = new System.Drawing.Point(199, 51);
             this.acRec1.Name = "acRec1";
             this.acRec1.Size = new System.Drawing.Size(1167, 705);
             this.acRec1.TabIndex = 3;
@@ -154,10 +157,24 @@
             // ehHomePnl1
             // 
             this.ehHomePnl1.BackColor = System.Drawing.Color.White;
-            this.ehHomePnl1.Location = new System.Drawing.Point(199, 49);
+            this.ehHomePnl1.Location = new System.Drawing.Point(199, 52);
             this.ehHomePnl1.Name = "ehHomePnl1";
             this.ehHomePnl1.Size = new System.Drawing.Size(1167, 705);
             this.ehHomePnl1.TabIndex = 4;
+            // 
+            // button2
+            // 
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.button2.Location = new System.Drawing.Point(1, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 37);
+            this.button2.TabIndex = 145;
+            this.button2.Text = "Logout";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ehHome
             // 
@@ -171,8 +188,9 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ehHome";
-            this.Text = "Form1";
+            this.Text = "EH ERP";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -192,6 +210,7 @@
         private System.Windows.Forms.Button button1;
         private acRec acRec1;
         private ehHomePnl ehHomePnl1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

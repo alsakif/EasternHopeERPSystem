@@ -27,7 +27,7 @@ namespace ehERP
             SoNo.Text = "";
             SiNo.Text = "";
             SprName.Text = "";
-
+            sBlnc.Text = "";
             eC1.Text = "";
             epName.Text = "";
             eoNo.Text = "";
