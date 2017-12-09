@@ -724,6 +724,8 @@ namespace ehERP
                     invSave.Enabled = false;
                     addP.Enabled = true;
                     invHidePnl01.SendToBack();
+
+                    
                 }
                 catch (Exception a)
                 {
@@ -733,24 +735,24 @@ namespace ehERP
             }
             else
             {
+                
                 MessageBox.Show("You are making the invoice for the first time for this order.");
                 invSave.Enabled = true;
                 addP.Enabled = false;
             }
             con.Close();
-        }
 
-        private void btnSaveDtl_Click(object sender, EventArgs e)
-        {
             con.Open();
-            string q1 = $"select * from final_rec_record where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
-            MySqlCommand cm = new MySqlCommand(q1, con);
-            MySqlDataReader dr = cm.ExecuteReader();
+            string q1 = $"select * from final_rec_record where PartyName like '%{ipName.Text}%' and OrderNo like '%{inoNo.Text}%'";
+            cm = new MySqlCommand(q1, con);
+            dr = cm.ExecuteReader();
             dr.Read();
             if (dr.HasRows)
             {
                 try
                 {
+                    ipartyName.Text = dr.GetString(2);
+                    inorderNo.Text = dr.GetString(3);
                     invPname.Text = dr.GetString(2);
                     invOno.Text = dr.GetString(3);
                     totalDealAmt.Text = dr.GetString(5);
@@ -767,11 +769,16 @@ namespace ehERP
                 MessageBox.Show("Nothing to show");
             }
             con.Close();
+        }
+
+        private void btnSaveDtl_Click(object sender, EventArgs e)
+        {
+           
 
             con.Open();
             string q2 = $"select * from final_inv_record where PartyName like '%{ipartyName.Text}%' and OrderNo like '%{inorderNo.Text}%'";
-            cm = new MySqlCommand(q2, con);
-            dr = cm.ExecuteReader();
+            MySqlCommand cm = new MySqlCommand(q2, con);
+            MySqlDataReader dr = cm.ExecuteReader();
             dr.Read();
             if (dr.HasRows)
             {
@@ -859,7 +866,7 @@ namespace ehERP
         /* *********************************************************Report page starts***************************************************************** */
         private void recReport_Click(object sender, EventArgs e)
         {
-            string query = @"select PartyName, OrderNo, Total, Balance, ReceivableBalance from final_rec_record where date(Date) = date(@startDate)";
+            string query = @"select PartyName, OrderNo, Total, ReceivableBalance from final_rec_record where date(Date) = date(@startDate)";
             using (MySqlConnection conn = new MySqlConnection(@"datasource=localhost; port = 3306; database=eh_db; username= root; password=;"))
             {
                 using (MySqlCommand cmd = new MySqlCommand())
